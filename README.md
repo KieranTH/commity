@@ -1,71 +1,52 @@
-# commity README
+# Commity
 
-This is the README for your extension "commity". After writing up a brief description, we recommend including the following sections.
+Commity is a sleek and intuitive Visual Studio Code extension designed to streamline the process of creating [Conventional Commits](https://www.conventionalcommits.org/). With Commity, you can quickly craft commit messages that adhere to the Conventional Commits specification, ensuring consistency and clarity in your version control history.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Commit Type Selection**: Choose from predefined commit types such as `feat`, `fix`, `chore`, `docs`, `style`, `refactor`, and `test`.
+- **Scope Input**: Optionally specify a scope for your commit (e.g., `button`, `api`).
+- **Description Prompt**: Provide a concise, imperative description for your commit.
+- **Automatic Command Execution**: Automatically generate and execute the `git commit` command with your crafted message.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Git must be installed and available in your system's PATH.
+- Visual Studio Code version 1.99.0 or higher.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This extension does not currently add any custom settings. Future updates may include configurable options for commit types or templates.
 
-For example:
+## Usage
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+1. Open the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS).
+2. Search for and select `Commity: Create a Commit Message`.
+3. Follow the prompts to:
+   - Select a commit type.
+   - Optionally specify a scope.
+   - Provide a commit description.
+4. The extension will automatically execute the `git commit` command with the generated message.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- The extension assumes that a Git repository is already initialized in the workspace. If not, the commit command will fail.
+- If no active terminal is available, the extension will create a new one.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+- Initial release with support for crafting Conventional Commit messages.
 
 ---
 
-## Following extension guidelines
+## Contributing
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+Contributions are welcome! If you encounter any issues or have feature suggestions, please open an issue or submit a pull request on the [GitHub repository](https://github.com/your-repo/commity).
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+## License
 
-## Working with Markdown
+This extension is licensed under the [MIT License](LICENSE).
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+**Enjoy crafting your commits with Commity!**
