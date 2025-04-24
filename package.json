@@ -18,6 +18,7 @@
 		]
 	},
 	"scripts": {
+		"prepare": "husky",
 		"vscode:prepublish": "npm run package",
 		"compile": "npm run check-types && npm run lint && node esbuild.js",
 		"watch": "npm-run-all -p watch:*",
@@ -40,7 +41,14 @@
 		"@vscode/test-cli": "^0.0.10",
 		"@vscode/test-electron": "^2.4.1",
 		"esbuild": "^0.25.1",
+		"husky": "^9.1.7",
 		"npm-run-all": "^4.1.5",
 		"typescript": "^5.8.2"
+	},
+	"lint-staged": {
+		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+			"biome lint --write --no-errors-on-unmatched",
+			"biome format --write"
+		]
 	}
 }
