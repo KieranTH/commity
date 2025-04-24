@@ -6,6 +6,10 @@
 	"engines": {
 		"vscode": "^1.99.0"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/KieranTH/commity"
+	},
 	"categories": ["Other"],
 	"activationEvents": [],
 	"main": "./dist/extension.js",
