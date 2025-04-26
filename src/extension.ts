@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
+import { exec } from "child_process";
 
 const commitTypeToEmoji: Record<string, string> = {
 	feat: "✨",
@@ -17,6 +18,13 @@ export function activate(context: vscode.ExtensionContext) {
 		"commity.commit",
 		async () => {
 			const config = vscode.workspace.getConfiguration("commity");
+
+			const autoStage = config.get<boolean>("autoStage", true);
+
+			if (autoStage) {
+				await runGitAdd();
+			}
+
 			const useEmoji = config.get<boolean>("useEmoji", true);
 			const types = [
 				{ label: "feat", description: "A new feature" },
@@ -66,6 +74,22 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(disposable);
+}
+
+async function runGitAdd(): Promise<void> {
+	return new Promise((resolve, reject) => {
+		exec("git add .", (error, stdout, stderr) => {
+			if (error) {
+				vscode.window.showErrorMessage(`Error staging changes: ${stderr}`);
+				reject(error);
+			} else {
+				vscode.window.showInformationMessage(
+					"All changes staged successfully.",
+				);
+				resolve();
+			}
+		});
+	});
 }
 
 // This method is called when your extension is deactivated
