@@ -21,6 +21,12 @@
 				"title": "Commity: Create a Commit Message"
 			}
 		],
+		"keybindings": [
+			{
+				"command": "commity.commit",
+				"key": "ctrl+m"
+			}
+		],
 		"configuration": {
 			"type": "object",
 			"title": "Commity Configuration",
