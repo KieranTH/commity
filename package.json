@@ -2,7 +2,7 @@
 	"name": "commity",
 	"displayName": "commity",
 	"description": "Sleek and Intuitive shortcut for submitting Conventional Commits",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"engines": {
 		"vscode": "^1.99.0"
 	},
