@@ -70,6 +70,11 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.window.activeTerminal || vscode.window.createTerminal();
 			terminal.show();
 			terminal.sendText(`git commit -m "${message}"`);
+
+			const autoPush = config.get<boolean>("autoPush", false);
+			if (autoPush) {
+				await runGitPush();
+			}
 		},
 	);
 
@@ -86,6 +91,20 @@ async function runGitAdd(): Promise<void> {
 				vscode.window.showInformationMessage(
 					"All changes staged successfully.",
 				);
+				resolve();
+			}
+		});
+	});
+}
+
+async function runGitPush(): Promise<void> {
+	return new Promise((resolve, reject) => {
+		exec("git push", (error, stdout, stderr) => {
+			if (error) {
+				vscode.window.showErrorMessage(`Error pushing changes: ${stderr}`);
+				reject(error);
+			} else {
+				vscode.window.showInformationMessage("Changes pushed successfully.");
 				resolve();
 			}
 		});
