@@ -20,7 +20,18 @@
 				"command": "commity.commit",
 				"title": "Commity: Create a Commit Message"
 			}
-		]
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Commity Configuration",
+			"properties": {
+				"commity.useEmoji": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable or disable emojis in commit titles."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"prepare": "husky",
@@ -36,7 +47,8 @@
 		"check-types": "tsc --noEmit",
 		"lint": "biome lint",
 		"format": "biome format --write",
-		"test": "vscode-test"
+		"test": "vscode-test",
+		"publish": "vsce publish"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
