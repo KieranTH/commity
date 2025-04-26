@@ -83,7 +83,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 async function runGitAdd(): Promise<void> {
 	return new Promise((resolve, reject) => {
-		exec("git add .", (error, stdout, stderr) => {
+		const workspaceFolders = vscode.workspace.workspaceFolders;
+		if (!workspaceFolders || workspaceFolders.length === 0) {
+			vscode.window.showErrorMessage("No workspace folder is open.");
+			return reject(new Error("No workspace folder is open."));
+		}
+
+		const workspacePath = workspaceFolders[0].uri.fsPath; // Use the first workspace folder
+		exec("git add .", { cwd: workspacePath }, (error, stdout, stderr) => {
 			if (error) {
 				vscode.window.showErrorMessage(`Error staging changes: ${stderr}`);
 				reject(error);
@@ -99,7 +106,14 @@ async function runGitAdd(): Promise<void> {
 
 async function runGitPush(): Promise<void> {
 	return new Promise((resolve, reject) => {
-		exec("git push", (error, stdout, stderr) => {
+		const workspaceFolders = vscode.workspace.workspaceFolders;
+		if (!workspaceFolders || workspaceFolders.length === 0) {
+			vscode.window.showErrorMessage("No workspace folder is open.");
+			return reject(new Error("No workspace folder is open."));
+		}
+
+		const workspacePath = workspaceFolders[0].uri.fsPath; // Use the first workspace folder
+		exec("git push", { cwd: workspacePath }, (error, stdout, stderr) => {
 			if (error) {
 				vscode.window.showErrorMessage(`Error pushing changes: ${stderr}`);
 				reject(error);
