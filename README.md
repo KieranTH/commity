@@ -28,6 +28,13 @@ This extension does not currently add any custom settings. Future updates may in
    - Provide a commit description.
 4. The extension will automatically execute the `git commit` command with the generated message.
 
+## Configuration
+
+### `commity.useEmoji`
+- **Type**: `boolean`
+- **Default**: `true`
+- **Description**: Enable or disable emojis in commit titles.
+
 ## Known Issues
 
 - The extension assumes that a Git repository is already initialized in the workspace. If not, the commit command will fail.

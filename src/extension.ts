@@ -2,10 +2,22 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
+const commitTypeToEmoji: Record<string, string> = {
+	feat: "✨",
+	fix: "🐛",
+	docs: "📚",
+	style: "🎨",
+	refactor: "♻️",
+	test: "✅",
+	chore: "🔧",
+} as const;
+
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand(
 		"commity.commit",
 		async () => {
+			const config = vscode.workspace.getConfiguration("commity");
+			const useEmoji = config.get<boolean>("useEmoji", true);
 			const types = [
 				{ label: "feat", description: "A new feature" },
 				{ label: "fix", description: "A bug fix" },
@@ -22,6 +34,11 @@ export function activate(context: vscode.ExtensionContext) {
 				},
 				{ label: "test", description: "Adding or fixing tests" },
 			];
+			if (useEmoji) {
+				for (const type of types) {
+					type.label = `${commitTypeToEmoji[type.label]} ${type.label}`;
+				}
+			}
 
 			const typePick = await vscode.window.showQuickPick(types, {
 				placeHolder: "Select a commit type",
@@ -39,12 +56,12 @@ export function activate(context: vscode.ExtensionContext) {
 			if (!description) return;
 
 			const scopePart = scope ? `(${scope})` : "";
-			const commitMessage = `${typePick.label}${scopePart}: ${description}`;
+			const message = `${typePick.label}${scopePart}: ${description}`;
 
 			const terminal =
 				vscode.window.activeTerminal || vscode.window.createTerminal();
 			terminal.show();
-			terminal.sendText(`git commit -m "${commitMessage}"`);
+			terminal.sendText(`git commit -m "${message}"`);
 		},
 	);
 
