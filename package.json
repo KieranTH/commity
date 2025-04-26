@@ -2,7 +2,7 @@
 	"name": "commity",
 	"displayName": "commity",
 	"description": "Sleek and Intuitive shortcut for submitting Conventional Commits",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"engines": {
 		"vscode": "^1.99.0"
 	},
@@ -19,6 +19,12 @@
 			{
 				"command": "commity.commit",
 				"title": "Commity: Create a Commit Message"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "commity.commit",
+				"key": "ctrl+m"
 			}
 		],
 		"configuration": {
