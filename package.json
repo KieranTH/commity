@@ -29,6 +29,11 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Enable or disable emojis in commit titles."
+				},
+				"commity.autoStage": {
+					"type": "boolean",
+					"default": true,
+					"description": "Automatically stage all changes before creating a commit."
 				}
 			}
 		}
