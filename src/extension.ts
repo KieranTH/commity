@@ -1,7 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { exec } from "child_process";
 
 const commitTypeToEmoji: Record<string, string> = {
 	feat: "✨",
@@ -82,47 +81,19 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 async function runGitAdd(): Promise<void> {
-	return new Promise((resolve, reject) => {
-		const workspaceFolders = vscode.workspace.workspaceFolders;
-		if (!workspaceFolders || workspaceFolders.length === 0) {
-			vscode.window.showErrorMessage("No workspace folder is open.");
-			return reject(new Error("No workspace folder is open."));
-		}
-
-		const workspacePath = workspaceFolders[0].uri.fsPath; // Use the first workspace folder
-		exec("git add .", { cwd: workspacePath }, (error, stdout, stderr) => {
-			if (error) {
-				vscode.window.showErrorMessage(`Error staging changes: ${stderr}`);
-				reject(error);
-			} else {
-				vscode.window.showInformationMessage(
-					"All changes staged successfully.",
-				);
-				resolve();
-			}
-		});
-	});
+	const terminal =
+		vscode.window.activeTerminal || vscode.window.createTerminal();
+	terminal.show();
+	terminal.sendText("git add .");
+	vscode.window.showInformationMessage("Staging changes...");
 }
 
 async function runGitPush(): Promise<void> {
-	return new Promise((resolve, reject) => {
-		const workspaceFolders = vscode.workspace.workspaceFolders;
-		if (!workspaceFolders || workspaceFolders.length === 0) {
-			vscode.window.showErrorMessage("No workspace folder is open.");
-			return reject(new Error("No workspace folder is open."));
-		}
-
-		const workspacePath = workspaceFolders[0].uri.fsPath; // Use the first workspace folder
-		exec("git push", { cwd: workspacePath }, (error, stdout, stderr) => {
-			if (error) {
-				vscode.window.showErrorMessage(`Error pushing changes: ${stderr}`);
-				reject(error);
-			} else {
-				vscode.window.showInformationMessage("Changes pushed successfully.");
-				resolve();
-			}
-		});
-	});
+	const terminal =
+		vscode.window.activeTerminal || vscode.window.createTerminal();
+	terminal.show();
+	terminal.sendText("git push");
+	vscode.window.showInformationMessage("Pushing changes...");
 }
 
 // This method is called when your extension is deactivated
